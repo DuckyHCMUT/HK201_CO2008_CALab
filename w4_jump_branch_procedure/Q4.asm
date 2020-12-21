@@ -52,4 +52,4 @@ End:
 arr: .word 1, 3, 8, 5, 12, 99, 15, 25, 0, 23
 msg1: .asciiz "Enter input k: "
 msg2: .asciiz "Array after swapped : "
-msg3: .asciiz " | "
+msg3: .asciiz " | " 
