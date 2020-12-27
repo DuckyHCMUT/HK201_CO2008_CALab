@@ -23,19 +23,20 @@ CopyName :
 	addiu $t0, $t0, 1 #increment the source register of name
 	addiu $s1, $s1, 1 #increment the address of string in struct by byte
 	addi $t2, $t2, 1  #increment counter, for the purpose of checking 28 bytes 
+	beq $t2, 25, padding
 	bne $t1, $zero, CopyName #exit loop if it reads NULL (\0) character
 	
 padding : 
-	beq $t1, 27, copyEnd #from 0 to 27 is 28 bytes (25 + 3 padding bytes)
+	beq $t2, 28, copyEnd #from 0 to 27 is 28 bytes (25 + 3 padding bytes)
 	sb $zero, 0($s1) #store '\0' after the string, and before next data
 	addiu $s1, $s1, 1 #increment the address of string in struct by byte
-	addi $t1, $t1, 1 #increment counter
+	addi $t2, $t2, 1 #increment counter
 	j padding
 copyEnd : #copy string finish, now read next data in a struct
 
 	li $t0, 10  #Age
 	sw $t0, 0($s1)
-	li $t0, 0 # is_male, 0 = female, 1 = male
+	li $t0, 1 # is_male, 0 = female, 1 = male
 	sw $t0, 4($s1)
 	addi $s1, $s1, 8
 	l.s $f0, score
@@ -43,19 +44,10 @@ copyEnd : #copy string finish, now read next data in a struct
 	
 #######End of struct allocation#######
 	
-.data
-	msg1 : .asciiz "This is a list of students\n"
-	name : .asciiz "\0" #sample name
-	name1 : .asciiz "Nguyen Van A"
-	name2 : .asciiz "Nguyen Van B"
-	name3 : .asciiz "Nguyen Thi C"
-	name4 : .asciiz "Tran Van D"
-	name5 : .asciiz "Le Thi E"
 	
-	score : .float 0.0 #sample score
-	score1 : .float 7.5
-	score2 : .float 8.0
-	score3 : .float 8.5
-	score4 : .float 9.4
-	score5 : .float 10.0
+	
+.data
+	name : .asciiz "This is the name" #sample name
+	score : .float 5.5 #sample score
+
 
