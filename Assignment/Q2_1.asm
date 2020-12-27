@@ -37,7 +37,7 @@ copyEnd : #copy string finish, now read next data in a struct
 	sw $t0, 0($s1)
 	li $t0, 0 # is_male, 0 = female, 1 = male
 	sw $t0, 4($s1)
-	addi $s1, $s1, 4
+	addi $s1, $s1, 8
 	l.s $f0, score
 	s.s $f0, 0($s1)
 	
