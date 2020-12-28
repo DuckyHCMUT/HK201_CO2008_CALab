@@ -45,7 +45,7 @@ copyEnd : #copy string finish, now read next data in a struct
 #######End of struct allocation#######
 
 
-#######Struct memory allocation, no instance yet#######
+#######Struct's instance allocation#######
 	addi $t3, $zero, 0 #array counter
 arr :
 	addi $s1, $s1, 4
@@ -128,7 +128,7 @@ copyEnd_inst : #copy string finish, now read next data in a struct
 	sw $t6, 0($s1)
 	addi $s1, $s1, 4
 	s.s $f4, 0($s1)
-#######End of struct allocation#######
+#######End of struct's instance allocation#######
 	addi $t3, $t3, 1
 	beq $t3, 5, Exit
 	j arr
